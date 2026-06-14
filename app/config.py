@@ -2145,7 +2145,9 @@ class Settings(BaseSettings):
         has_scoped_credentials = scoped_shop_id is not None or scoped_secret_key is not None
         shop_id = scoped_shop_id if has_scoped_credentials else self.YOOKASSA_SHOP_ID
         secret_key = scoped_secret_key if has_scoped_credentials else self.YOOKASSA_SECRET_KEY
-        return_url = self._get_yookassa_scope_value(normalized_scope, 'RETURN_URL') or self._get_legacy_yookassa_return_url()
+        return_url = (
+            self._get_yookassa_scope_value(normalized_scope, 'RETURN_URL') or self._get_legacy_yookassa_return_url()
+        )
 
         sbp_enabled = self._get_yookassa_scope_value(normalized_scope, 'SBP_ENABLED')
         if sbp_enabled is None:

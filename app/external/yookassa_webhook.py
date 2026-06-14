@@ -76,9 +76,7 @@ YOOKASSA_WEBHOOK_SCOPES: tuple[str, ...] = ('bot', 'cabinet')
 
 def _is_yookassa_webhook_enabled() -> bool:
     return (
-        settings.is_yookassa_enabled()
-        or settings.is_yookassa_enabled('bot')
-        or settings.is_yookassa_enabled('cabinet')
+        settings.is_yookassa_enabled() or settings.is_yookassa_enabled('bot') or settings.is_yookassa_enabled('cabinet')
     )
 
 

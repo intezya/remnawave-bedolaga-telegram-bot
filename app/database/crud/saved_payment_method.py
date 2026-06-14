@@ -49,10 +49,7 @@ async def create_saved_payment_method(
         update_values['yookassa_scope'] = yookassa_scope
 
     result = await db.execute(
-        update(SavedPaymentMethod)
-        .where(and_(*conditions))
-        .values(**update_values)
-        .returning(SavedPaymentMethod)
+        update(SavedPaymentMethod).where(and_(*conditions)).values(**update_values).returning(SavedPaymentMethod)
     )
     reactivated = result.scalar_one_or_none()
     if reactivated:
@@ -120,9 +117,7 @@ async def get_active_payment_methods_by_user(
         conditions.append(SavedPaymentMethod.yookassa_scope == yookassa_scope)
 
     result = await db.execute(
-        select(SavedPaymentMethod)
-        .where(and_(*conditions))
-        .order_by(SavedPaymentMethod.created_at.desc())
+        select(SavedPaymentMethod).where(and_(*conditions)).order_by(SavedPaymentMethod.created_at.desc())
     )
     return list(result.scalars().all())
 
@@ -142,11 +137,7 @@ async def get_user_ids_with_active_payment_methods(
     if yookassa_scope is not None:
         conditions.append(SavedPaymentMethod.yookassa_scope == yookassa_scope)
 
-    result = await db.execute(
-        select(SavedPaymentMethod.user_id)
-        .where(and_(*conditions))
-        .distinct()
-    )
+    result = await db.execute(select(SavedPaymentMethod.user_id).where(and_(*conditions)).distinct())
     return set(result.scalars().all())
 
 

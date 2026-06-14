@@ -335,9 +335,7 @@ def create_payment_router(bot: Bot, payment_service: PaymentService) -> APIRoute
         routes_registered = True
 
     yookassa_enabled = (
-        settings.is_yookassa_enabled()
-        or settings.is_yookassa_enabled('bot')
-        or settings.is_yookassa_enabled('cabinet')
+        settings.is_yookassa_enabled() or settings.is_yookassa_enabled('bot') or settings.is_yookassa_enabled('cabinet')
     )
 
     if yookassa_enabled:

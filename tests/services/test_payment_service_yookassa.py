@@ -357,7 +357,9 @@ async def test_get_yookassa_payment_status_uses_payment_scope(monkeypatch: pytes
         assert local_payment_id == 55
         return payment
 
-    async def fake_update_status(db, yookassa_payment_id, status, is_paid, is_captured, captured_at, payment_method_type):
+    async def fake_update_status(
+        db, yookassa_payment_id, status, is_paid, is_captured, captured_at, payment_method_type
+    ):
         payment.status = status
         payment.is_paid = is_paid
         payment.payment_method_type = payment_method_type
